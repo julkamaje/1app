@@ -5,6 +5,8 @@ public class Frame {
     private int id;
     private int roll1;
     private int roll2;
+    private boolean roll1Done;
+    private boolean roll2Done;
 
     public Frame() {}
 
@@ -36,5 +38,21 @@ public class Frame {
 
     public void setRoll2(int roll2) {
         this.roll2 = roll2;
+    }
+
+    public boolean isRoll1Done() {
+        return roll1Done;
+    }
+
+    public void setRoll1Done(boolean roll1Done) {
+        this.roll1Done = roll1Done;
+    }
+
+    public boolean isRoll2Done() {
+        return roll2Done;
+    }
+
+    public void setRoll2Done(boolean roll2Done) {
+        this.roll2Done = roll2Done;
     }
 }

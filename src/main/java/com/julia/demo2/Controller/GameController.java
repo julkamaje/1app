@@ -2,11 +2,12 @@ package com.julia.demo2.Controller;
 
 import com.julia.demo2.Entity.Frame;
 import com.julia.demo2.Service.FrameService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
+
+import javax.websocket.server.PathParam;
 import java.util.Collection;
 
 @RestController
@@ -22,14 +23,25 @@ public class GameController {
         return frameService.getAllFrames();
     }
 
-    @RequestMapping(value = "/roll", method = RequestMethod.PUT)
-    public void roll(int pins) {
-
-    }
-
+    //	http://localhost:8080/game/score/
     @RequestMapping(value = "/score", method = RequestMethod.GET)
     public int score() {
-        return 1;
+        return frameService.score();
     }
 
+    //	http://localhost:8080/game/roll?pins=1
+    @RequestMapping(value = "/roll", method = RequestMethod.PUT) //consumes=MediaType.APPLICATION_JSON_VALUE)
+    public void roll(@RequestBody String pins) {
+        try {
+            frameService.roll(Integer.parseInt(pins));
+        } catch(Exception e) {
+            e.getMessage();
+        }
+    }
+
+    //	http://localhost:8080/game/roll?pinsNumber=1
+//    @RequestMapping(value = "/roll", method = RequestMethod.PUT)
+//    public void roll(@RequestParam(value="pinsNumber") String pins) {
+//        //frameService.roll(pins);
+//    }
 }
