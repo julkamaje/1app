@@ -11,6 +11,14 @@ public class LastFrame extends Frame {
     public LastFrame(int id, int roll1, int roll2, int roll3) {
         super(id, roll1, roll2);
         this.roll3 = roll3;
+        this.roll3Done = true;
+    }
+
+    public LastFrame(int id, int roll1, int roll2, int roll3
+            , boolean isRoll1Done, boolean isRoll2Done, boolean isRoll3Done) {
+        super(id, roll1, roll2, isRoll1Done, isRoll2Done);
+        this.roll3 = roll3;
+        this.roll3Done = isRoll3Done;
     }
 
     public int getRoll3() {

@@ -13,18 +13,18 @@ import java.util.Collection;
 public class GameController {
 
     @Autowired
-    private GameService frameService;
+    private GameService gameService;
 
     //	http://localhost:8080/game/
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public Collection<Frame> getAllFrames() {
-        return frameService.getAllFrames();
+        return gameService.getAllFrames();
     }
 
     //	http://localhost:8080/game/score/
     @RequestMapping(value = "/score", method = RequestMethod.GET)
     public int score() {
-        return frameService.score();
+        return gameService.score();
     }
 
     //	http://localhost:8080/game/roll?pins=1 <-- nie dziala
@@ -32,7 +32,7 @@ public class GameController {
     @RequestMapping(value = "/roll", method = RequestMethod.PUT) //consumes=MediaType.APPLICATION_JSON_VALUE)
     public void roll(@RequestBody String pins) {
         try {
-            frameService.roll(Integer.parseInt(pins));
+            gameService.roll(Integer.parseInt(pins));
         } catch(Exception e) {
             e.getMessage();
         }
@@ -41,6 +41,6 @@ public class GameController {
     //	http://localhost:8080/game/roll?pinsNumber=1
 //    @RequestMapping(value = "/roll", method = RequestMethod.PUT)
 //    public void roll(@RequestParam(value="pinsNumber") String pins) {
-//        //frameService.roll(pins);
+//        //gameService.roll(pins);
 //    }
 }

@@ -45,7 +45,7 @@ public class GameService {
         }
     }
 
-    public boolean isGameFinished() {
+    private boolean isGameFinished() {
         LastFrame lastFrame = frameDao.getLastFrame();
         if( lastFrame == null ) {
             return false;
@@ -60,7 +60,7 @@ public class GameService {
     }
 
     /*
-    * gives total number of points at the end of the game
+    * gives total number of points at the END of the game
     * */
     public int score() {
 
@@ -81,17 +81,24 @@ public class GameService {
 
             // bonus for previous rolls
             if(previousRoll1 == 10) { // strike
-                score += roll1 + roll2;
+                score += previousRoll2 + roll1;
             } else if (previousRoll1 + previousRoll2 == 10) { // spare
                 score += roll1;
+            }
+
+
+            if( frame instanceof LastFrame) {
+                if(roll1 == 10) { // bonus for strike
+                    score += roll2 + ((LastFrame) frame ).getRoll3();
+                }
+                if(roll1 + roll2 == 10) { // bonus for spare
+                    score += ((LastFrame) frame ).getRoll3();
+                }
             }
 
             previousRoll1 = roll1;
             previousRoll2 = roll2;
 
-            if( frame instanceof LastFrame) {
-                score+= ((LastFrame) frame ).getRoll3();
-            }
         }
 
         return score;

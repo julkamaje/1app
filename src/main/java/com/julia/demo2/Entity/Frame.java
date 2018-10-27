@@ -14,7 +14,18 @@ public class Frame {
         this.id = id;
         this.roll1 = roll1;
         this.roll2 = roll2;
+        this.roll1Done = true;
+        this.roll2Done = true;
     }
+
+    public Frame(int id, int roll1, int roll2, boolean roll1Done, boolean roll2Done) {
+        this.id = id;
+        this.roll1 = roll1;
+        this.roll2 = roll2;
+        this.roll1Done = roll1Done;
+        this.roll2Done = roll2Done;
+    }
+
 
     public int getId() {
         return id;
