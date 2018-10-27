@@ -8,16 +8,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class FrameService {
+public class GameService {
 
     @Autowired
     private FrameDao frameDao;
+
 
     public Collection<Frame> getAllFrames() {
         return frameDao.getAllFrames();
     }
 
-    public void roll(int pins) {
+    public void roll( int pins ) {
+        if( pins < 0 || pins > 10 ) {
+            throw new Error("number of pins is from the range <0; 10>");
+        }
+
         Collection<Frame> allFrames = getAllFrames();
         for( Frame frame : allFrames ) {
             if( frame.isRoll1Done() == false ) {
@@ -29,9 +34,7 @@ public class FrameService {
                 frame.setRoll2Done(true);
                 break;
             } else if ( frame instanceof LastFrame ) {
-                LastFrame lastFrame = (LastFrame) frame;
-
-                if( lastFrame.getRoll1() + lastFrame.getRoll2() != 10 || lastFrame.isRoll3Done() == true ) {
+                if( isGameFinished() ) {
                     throw new Error("End of game. Can't roll any more! " +
                             "Get score first, and than start a new game.");
                 } else {
@@ -42,16 +45,37 @@ public class FrameService {
         }
     }
 
+    public boolean isGameFinished() {
+        LastFrame lastFrame = frameDao.getLastFrame();
+        if( lastFrame == null ) {
+            return false;
+        }
+
+        if( lastFrame.getRoll1() == 10 && lastFrame.isRoll2Done() && lastFrame.isRoll3Done() // strike
+            || lastFrame.isRoll2Done() && lastFrame.getRoll1() + lastFrame.getRoll2() == 10 && lastFrame.isRoll3Done() // spare
+            ||  lastFrame.isRoll1Done() && lastFrame.isRoll2Done() && lastFrame.getRoll1() + lastFrame.getRoll2() < 10 ) {
+            return true;
+        }
+        return false;
+    }
+
+    /*
+    * gives total number of points at the end of the game
+    * */
     public int score() {
+
+        if( !isGameFinished() ) {
+            throw new Error("Game is not finished yet. " +
+                    "Score is available only after all rolls are done.");
+        }
 
         Collection<Frame> allFrames = getAllFrames();
         int score = 0, previousRoll1=0, previousRoll2=0;
-        boolean allRollsDone = false;
 
         for( Frame frame : allFrames ) {
 
-            int roll1 = frame.getRoll1();
-            int roll2 = frame.getRoll2();
+            int roll1 = frame.getRoll1(),
+                roll2 = frame.getRoll2();
 
             score += roll1 + roll2;
 
@@ -67,12 +91,9 @@ public class FrameService {
 
             if( frame instanceof LastFrame) {
                 score+= ((LastFrame) frame ).getRoll3();
-                allRollsDone = ((LastFrame) frame ).isRoll3Done();
             }
         }
 
-        if(allRollsDone) return score;
-        return -1;
-
+        return score;
     }
 }

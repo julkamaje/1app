@@ -33,6 +33,10 @@ public class FrameDao {
         return this.frames.values();
     }
 
+    public LastFrame getLastFrame() {
+        return (LastFrame) frames.get(10);
+    }
+
     public void saveAllFrames(Collection<Frame> allFrames) {
         this.frames = ( Map<Integer, Frame> )allFrames;
     }
