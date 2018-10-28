@@ -1,5 +1,6 @@
 package com.julia.demo2.Controller;
 
+import com.julia.demo2.Dao.FrameRepository;
 import com.julia.demo2.Entity.Frame;
 import com.julia.demo2.Service.GameService;
 

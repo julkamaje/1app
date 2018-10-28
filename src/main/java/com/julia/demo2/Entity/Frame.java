@@ -1,7 +1,15 @@
 package com.julia.demo2.Entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Frame {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private int roll1;
     private int roll2;
@@ -10,22 +18,37 @@ public class Frame {
 
     public Frame() {}
 
-    public Frame(int id, int roll1, int roll2) {
-        this.id = id;
+//    public Frame(int id, int roll1, int roll2) {
+//        this.id = id;
+//        this.roll1 = roll1;
+//        this.roll2 = roll2;
+//        this.roll1Done = true;
+//        this.roll2Done = true;
+//    }
+//
+//    public Frame(int id, int roll1, int roll2, boolean roll1Done, boolean roll2Done) {
+//        this.id = id;
+//        this.roll1 = roll1;
+//        this.roll2 = roll2;
+//        this.roll1Done = roll1Done;
+//        this.roll2Done = roll2Done;
+//    }
+
+    public Frame(int roll1, int roll2) {
+        //this.id = id;
         this.roll1 = roll1;
         this.roll2 = roll2;
         this.roll1Done = true;
         this.roll2Done = true;
     }
 
-    public Frame(int id, int roll1, int roll2, boolean roll1Done, boolean roll2Done) {
-        this.id = id;
+    public Frame(int roll1, int roll2, boolean roll1Done, boolean roll2Done) {
+        //this.id = id;
         this.roll1 = roll1;
         this.roll2 = roll2;
         this.roll1Done = roll1Done;
         this.roll2Done = roll2Done;
     }
-
 
     public int getId() {
         return id;

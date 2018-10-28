@@ -1,5 +1,8 @@
 package com.julia.demo2.Entity;
 
+import javax.persistence.Entity;
+
+@Entity
 public class LastFrame extends Frame {
 
     private int roll3;
@@ -8,15 +11,15 @@ public class LastFrame extends Frame {
 
     public LastFrame() {}
 
-    public LastFrame(int id, int roll1, int roll2, int roll3) {
-        super(id, roll1, roll2);
+    public LastFrame(int roll1, int roll2, int roll3) {
+        super(roll1, roll2);
         this.roll3 = roll3;
         this.roll3Done = true;
     }
 
-    public LastFrame(int id, int roll1, int roll2, int roll3
+    public LastFrame(int roll1, int roll2, int roll3
             , boolean isRoll1Done, boolean isRoll2Done, boolean isRoll3Done) {
-        super(id, roll1, roll2, isRoll1Done, isRoll2Done);
+        super(roll1, roll2, isRoll1Done, isRoll2Done);
         this.roll3 = roll3;
         this.roll3Done = isRoll3Done;
     }
