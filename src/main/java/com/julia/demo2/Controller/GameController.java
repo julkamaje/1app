@@ -1,13 +1,12 @@
 package com.julia.demo2.Controller;
 
-import com.julia.demo2.Dao.FrameRepository;
-import com.julia.demo2.Entity.Frame;
-import com.julia.demo2.Service.GameService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+
+import com.julia.demo2.Entity.Frame;
+import com.julia.demo2.Service.GameService;
 
 @RestController
 @RequestMapping("/game")
@@ -28,9 +27,8 @@ public class GameController {
         return gameService.score();
     }
 
-    //	http://localhost:8080/game/roll?pins=1 <-- nie dziala
-    // http://localhost:8080/game/roll
-    @RequestMapping(value = "/roll", method = RequestMethod.PUT) //consumes=MediaType.APPLICATION_JSON_VALUE)
+    // http://localhost:8080/game/roll/
+    @RequestMapping(value = "/roll", method = RequestMethod.PUT)
     public void roll(@RequestBody String pins) {
         try {
             gameService.roll(Integer.parseInt(pins));
@@ -38,10 +36,4 @@ public class GameController {
             e.getMessage();
         }
     }
-
-    //	http://localhost:8080/game/roll?pinsNumber=1
-//    @RequestMapping(value = "/roll", method = RequestMethod.PUT)
-//    public void roll(@RequestParam(value="pinsNumber") String pins) {
-//        //gameService.roll(pins);
-//    }
 }

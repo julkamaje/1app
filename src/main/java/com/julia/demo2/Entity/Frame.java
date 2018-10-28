@@ -18,24 +18,7 @@ public class Frame {
 
     public Frame() {}
 
-//    public Frame(int id, int roll1, int roll2) {
-//        this.id = id;
-//        this.roll1 = roll1;
-//        this.roll2 = roll2;
-//        this.roll1Done = true;
-//        this.roll2Done = true;
-//    }
-//
-//    public Frame(int id, int roll1, int roll2, boolean roll1Done, boolean roll2Done) {
-//        this.id = id;
-//        this.roll1 = roll1;
-//        this.roll2 = roll2;
-//        this.roll1Done = roll1Done;
-//        this.roll2Done = roll2Done;
-//    }
-
     public Frame(int roll1, int roll2) {
-        //this.id = id;
         this.roll1 = roll1;
         this.roll2 = roll2;
         this.roll1Done = true;
@@ -43,7 +26,6 @@ public class Frame {
     }
 
     public Frame(int roll1, int roll2, boolean roll1Done, boolean roll2Done) {
-        //this.id = id;
         this.roll1 = roll1;
         this.roll2 = roll2;
         this.roll1Done = roll1Done;
@@ -52,10 +34,6 @@ public class Frame {
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getRoll1() {

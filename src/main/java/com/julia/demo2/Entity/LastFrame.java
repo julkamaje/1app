@@ -8,7 +8,6 @@ public class LastFrame extends Frame {
     private int roll3;
     private boolean roll3Done;
 
-
     public LastFrame() {}
 
     public LastFrame(int roll1, int roll2, int roll3) {
