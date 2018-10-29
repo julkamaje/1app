@@ -16,6 +16,13 @@ public class GameService {
 
     private static final int maxNumberOfFrames = 10;
 
+    public static final String END_OF_GAME = "End of game. Can't roll any more! " +
+            "Get score first, and than start a new game.";
+
+    public static final String GAME_NOT_FINISHED = "Game is not finished yet. " +
+            "Score is available only after all rolls are done.";
+
+
     public Collection<Frame> getAllFrames() {
         return repo.findAll();
     }
@@ -94,8 +101,7 @@ public class GameService {
     public int score() {
 
         if( !isGameFinished() )
-            throw new Error("Game is not finished yet. " +
-                    "Score is available only after all rolls are done.");
+            throw new Error(GAME_NOT_FINISHED);
 
         Collection<Frame> allFrames = getAllFrames();
         int score = 0, previousRoll1 = 0, previousRoll2 = 0;
